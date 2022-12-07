@@ -24,7 +24,7 @@ const styles = StyleSheet.create<HomeStyleInterface>({
 });
 
 const Home = () => {
-  const scrollRef = useRef<ScrollView>();
+  const scrollRef = useRef<ScrollView>(null);
 
   const [refreshing, setRefreshing] = React.useState(false);
 
