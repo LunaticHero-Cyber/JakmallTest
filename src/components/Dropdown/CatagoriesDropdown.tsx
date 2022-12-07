@@ -41,10 +41,12 @@ const CatagoriesDropdown = ({
   categoryTitle,
   isRefreshing = false,
   fetchJokes,
+  TopButton = () => <></>,
 }: {
   categoryTitle: string;
-  isRefreshing?: boolean;
   fetchJokes: () => Promise<Array<JokeInterface>>;
+  isRefreshing?: boolean;
+  TopButton?: () => JSX.Element;
 }) => {
   const [jokes, setJokes] = useState<Array<JokeInterface>>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -54,7 +56,7 @@ const CatagoriesDropdown = ({
   const [numberOfTimesAdded, setNumberOfTimesAdded] = useState(0);
 
   const handleFetchingJokeList = async () => {
-    const categories = (await fetchJokes()) ?? [];
+    const categories = (await fetchJokes?.()) ?? [];
     setJokes(categories);
     setNumberOfTimesAdded(numberOfTimesAdded + 1);
     setIsLoading(false);
@@ -109,6 +111,9 @@ const CatagoriesDropdown = ({
     <>
       <Wrapper style={styles.card}>
         <Text style={styles.nameText}>{categoryTitle}</Text>
+
+        <TopButton />
+        <BoxSpace.A />
         <Button title="Drop" onPress={onPressDropButton} />
       </Wrapper>
 
